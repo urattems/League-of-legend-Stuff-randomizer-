@@ -3,138 +3,195 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b1020">
-  <meta name="description" content="Roulette League of Legends : champion, rôle, sorts et build aléatoires.">
-  <title>LoL Stuff Randomizer — Roulette du chaos</title>
+  <meta name="theme-color" content="#0a0c0c">
+  <meta name="description" content="Rift Randomizer — générateur de challenges League of Legends. Champion, rôle, sorts et build tirés au hasard.">
+  <title>Rift Randomizer — Challenge Generator</title>
+  <link rel="icon" href="./assets/mark.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://ddragon.leagueoflegends.com">
   <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-  <div class="noise" aria-hidden="true"></div>
+<body data-mode="easy">
+  <div class="page-grid" aria-hidden="true"></div>
 
-  <main class="shell">
-    <header class="hero">
-      <div class="eyebrow">LEAGUE OF LEGENDS • CHALLENGE GENERATOR</div>
-      <h1>Roulette du <span>Chaos</span> 🎰</h1>
-      <p class="subtitle">
-        Un champion. Un rôle. Des sorts discutables. Un build potentiellement criminel.
-        La roulette décide, toi tu assumes.
-      </p>
-      <div class="status-row">
-        <span id="dataStatus" class="status">Chargement des données Riot…</span>
+  <div class="site">
+    <header class="masthead">
+      <a class="wordmark" href="./" aria-label="Rift Randomizer — accueil">
+        <span class="mark"><img src="./assets/mark.svg" alt=""></span>
+        <span>RIFT / RANDOMIZER</span>
+      </a>
+
+      <div class="masthead-status">
+        <span id="dataStatus" class="status"><i></i>Connexion aux données Riot…</span>
         <span id="patchBadge" class="patch-badge" hidden></span>
       </div>
+
+      <div class="masthead-code">RR—26</div>
     </header>
 
-    <section class="mode-picker" aria-label="Choisir la difficulté">
-      <button class="mode-card selected" data-mode="easy" type="button">
-        <span class="mode-icon">🟢</span>
-        <span>
-          <strong>Facile</strong>
-          <small>Champion + rôle + Flash + 1 sort</small>
-        </span>
-      </button>
+    <main>
+      <section class="intro">
+        <p class="intro-index">001 / CHALLENGE GENERATOR</p>
+        <h1>Le hasard choisit.<br><em>Tu joues.</em></h1>
+        <p class="intro-copy">
+          Pas de tier list, pas d'excuse. Un champion, un poste, des sorts et parfois
+          six achats que personne n'aurait dû mettre ensemble.
+        </p>
+      </section>
 
-      <button class="mode-card" data-mode="hard" type="button">
-        <span class="mode-icon">🟠</span>
-        <span>
-          <strong>Difficile</strong>
-          <small>Champion + rôle + 2 sorts + 2 items</small>
-        </span>
-      </button>
-
-      <button class="mode-card" data-mode="nightmare" type="button">
-        <span class="mode-icon">🔴</span>
-        <span>
-          <strong>Cauchemar</strong>
-          <small>Champion + rôle + 2 sorts + build complet</small>
-        </span>
-      </button>
-    </section>
-
-    <section class="roulette-panel">
-      <div class="roulette-head">
-        <div>
-          <p class="section-kicker">TON DESTIN</p>
-          <h2 id="modeTitle">Mode Facile</h2>
+      <section class="control-strip" aria-label="Choisir la difficulté">
+        <div class="control-label">
+          <span>MODE</span>
+          <small id="modeRisk">Risque faible</small>
         </div>
-        <button id="rerollSeed" class="ghost-button" type="button" title="Créer un nouveau seed">
-          Nouveau seed
+
+        <button class="mode-card selected" data-mode="easy" type="button">
+          <span class="mode-no">01</span>
+          <span>
+            <strong>Facile</strong>
+            <small>Flash + 1 sort</small>
+          </span>
         </button>
-      </div>
 
-      <div id="resultGrid" class="result-grid" aria-live="polite">
-        <article class="result-card champion-card" data-slot="champion">
-          <span class="label">Champion</span>
-          <div class="result-content">
-            <div class="image-wrap"><div class="placeholder">?</div></div>
-            <strong>???</strong>
-          </div>
-        </article>
+        <button class="mode-card" data-mode="hard" type="button">
+          <span class="mode-no">02</span>
+          <span>
+            <strong>Difficile</strong>
+            <small>2 sorts + 2 items</small>
+          </span>
+        </button>
 
-        <article class="result-card" data-slot="role">
-          <span class="label">Rôle</span>
-          <div class="result-content">
-            <div class="role-icon placeholder">?</div>
-            <strong>???</strong>
-          </div>
-        </article>
+        <button class="mode-card" data-mode="nightmare" type="button">
+          <span class="mode-no">03</span>
+          <span>
+            <strong>Cauchemar</strong>
+            <small>Build complet</small>
+          </span>
+        </button>
+      </section>
 
-        <article class="result-card" data-slot="spell1">
-          <span class="label">Sort 1</span>
-          <div class="result-content">
-            <div class="image-wrap"><div class="placeholder">?</div></div>
-            <strong>???</strong>
+      <section class="machine">
+        <header class="machine-head">
+          <div>
+            <p>002 / TIRAGE</p>
+            <h2 id="modeTitle">Mode Facile</h2>
+            <span id="modeDescription">Le hasard reste encore un peu civilisé.</span>
           </div>
-        </article>
+          <button id="rerollSeed" class="text-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5M6.1 9A7 7 0 0 1 18 6l2 2M17.9 15A7 7 0 0 1 6 18l-2-2"/></svg>
+            Changer le seed
+          </button>
+        </header>
 
-        <article class="result-card" data-slot="spell2">
-          <span class="label">Sort 2</span>
-          <div class="result-content">
-            <div class="image-wrap"><div class="placeholder">?</div></div>
-            <strong>???</strong>
-          </div>
-        </article>
+        <div id="resultGrid" class="draw-board" aria-live="polite">
+          <article class="draw-cell champion-cell" data-slot="champion">
+            <div class="cell-meta"><span>CHAMPION</span><b>A/01</b></div>
+            <div class="result-content">
+              <div class="image-wrap"><div class="placeholder">?</div></div>
+              <div class="result-name">
+                <strong>???</strong>
+                <small>Identité en attente</small>
+              </div>
+            </div>
+          </article>
 
-        <div id="itemsArea" class="items-area" hidden>
-          <div class="items-header">
-            <span class="label">Items imposés</span>
-            <span id="itemCount" class="mini-badge"></span>
+          <article class="draw-cell role-cell" data-slot="role">
+            <div class="cell-meta"><span>POSTE</span><b>A/02</b></div>
+            <div class="result-content">
+              <div class="role-icon placeholder">?</div>
+              <div class="result-name">
+                <strong>???</strong>
+                <small>Position assignée</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="draw-cell spell-cell" data-slot="spell1">
+            <div class="cell-meta"><span>SORT I</span><b>B/01</b></div>
+            <div class="result-content">
+              <div class="image-wrap"><div class="placeholder">?</div></div>
+              <div class="result-name">
+                <strong>???</strong>
+                <small>Invocation primaire</small>
+              </div>
+            </div>
+          </article>
+
+          <article class="draw-cell spell-cell" data-slot="spell2">
+            <div class="cell-meta"><span>SORT II</span><b>B/02</b></div>
+            <div class="result-content">
+              <div class="image-wrap"><div class="placeholder">?</div></div>
+              <div class="result-name">
+                <strong>???</strong>
+                <small>Invocation secondaire</small>
+              </div>
+            </div>
+          </article>
+
+          <div id="itemsArea" class="items-area" hidden>
+            <div class="items-head">
+              <div>
+                <span>ARSENAL IMPOSÉ</span>
+                <small>Ordre d'achat libre. Présence dans le build final obligatoire.</small>
+              </div>
+              <b id="itemCount"></b>
+            </div>
+            <div id="itemsGrid" class="items-grid"></div>
           </div>
-          <div id="itemsGrid" class="items-grid"></div>
         </div>
-      </div>
 
-      <button id="rollButton" class="roll-button" type="button" disabled>
-        <span class="dice">🎲</span>
-        <span>TOURNER LA ROULETTE</span>
-      </button>
+        <div class="machine-actions">
+          <button id="rollButton" class="roll-button" type="button" disabled>
+            <span class="roll-number">↳</span>
+            <span class="roll-text">
+              <strong>LANCER LE TIRAGE</strong>
+              <small>Une fois vu, le résultat compte.</small>
+            </span>
+            <span class="roll-key">SPACE</span>
+          </button>
 
-      <div class="seed-row">
-        <span>Seed</span>
-        <code id="seedValue">—</code>
-      </div>
+          <div class="seed-panel">
+            <span>SEED ACTIF</span>
+            <code id="seedValue">—</code>
+          </div>
+        </div>
 
-      <div class="action-row">
-        <button id="copyButton" class="secondary-button" type="button" disabled>📋 Copier le challenge</button>
-        <button id="shareButton" class="secondary-button" type="button" disabled>🔗 Partager le même tirage</button>
-      </div>
-    </section>
+        <div class="share-row">
+          <button id="copyButton" class="minor-button" type="button" disabled>
+            <span>01</span> Copier le challenge
+          </button>
+          <button id="shareButton" class="minor-button" type="button" disabled>
+            <span>02</span> Partager exactement ce tirage
+          </button>
+        </div>
+      </section>
 
-    <section class="rules">
-      <h2>Les règles du crime</h2>
-      <div class="rules-grid">
-        <div><span>1</span><p>Tu joues le champion et le rôle tirés.</p></div>
-        <div><span>2</span><p>Tu prends exactement les sorts imposés.</p></div>
-        <div><span>3</span><p>En Difficile/Cauchemar, les items tirés sont obligatoires.</p></div>
-        <div><span>4</span><p>Pas de reroll après avoir vu le résultat. Sinon la roulette gagne.</p></div>
+      <section class="notes">
+        <div class="notes-title">
+          <p>003 / PROTOCOLE</p>
+          <h2>Quatre règles.<br>Pas de tribunal.</h2>
+        </div>
+
+        <ol class="rules">
+          <li><b>01</b><span>Le champion et le poste affichés sont ceux que tu joues.</span></li>
+          <li><b>02</b><span>Les sorts d'invocateur sont imposés, même quand le tirage te déteste.</span></li>
+          <li><b>03</b><span>En Difficile et Cauchemar, chaque item tiré doit être présent dans le build final.</span></li>
+          <li><b>04</b><span>Tu peux changer de seed avant le tirage. Après, c'est de la lâcheté statistique.</span></li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div>
+        <strong>RIFT / RANDOMIZER</strong>
+        <span>outil communautaire, sans backend</span>
       </div>
-      <p class="fine-print">
-        Les données (champions, sorts, objets et icônes) sont chargées depuis Riot Data Dragon.
-        Projet communautaire non affilié à Riot Games.
+      <p>
+        Données et visuels de jeu chargés depuis Riot Data Dragon.
+        Projet non affilié à Riot Games.
       </p>
-    </section>
-  </main>
+      <span class="footer-mark">RR—01</span>
+    </footer>
+  </div>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="./app.js" defer></script>
