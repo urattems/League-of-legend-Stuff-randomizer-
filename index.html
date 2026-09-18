@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Roulette League of Legends : champion, rôle, sorts et build aléatoires.">
+  <title>LoL Stuff Randomizer — Roulette du chaos</title>
+  <link rel="preconnect" href="https://ddragon.leagueoflegends.com">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <main class="shell">
+    <header class="hero">
+      <div class="eyebrow">LEAGUE OF LEGENDS • CHALLENGE GENERATOR</div>
+      <h1>Roulette du <span>Chaos</span> 🎰</h1>
+      <p class="subtitle">
+        Un champion. Un rôle. Des sorts discutables. Un build potentiellement criminel.
+        La roulette décide, toi tu assumes.
+      </p>
+      <div class="status-row">
+        <span id="dataStatus" class="status">Chargement des données Riot…</span>
+        <span id="patchBadge" class="patch-badge" hidden></span>
+      </div>
+    </header>
+
+    <section class="mode-picker" aria-label="Choisir la difficulté">
+      <button class="mode-card selected" data-mode="easy" type="button">
+        <span class="mode-icon">🟢</span>
+        <span>
+          <strong>Facile</strong>
+          <small>Champion + rôle + Flash + 1 sort</small>
+        </span>
+      </button>
+
+      <button class="mode-card" data-mode="hard" type="button">
+        <span class="mode-icon">🟠</span>
+        <span>
+          <strong>Difficile</strong>
+          <small>Champion + rôle + 2 sorts + 2 items</small>
+        </span>
+      </button>
+
+      <button class="mode-card" data-mode="nightmare" type="button">
+        <span class="mode-icon">🔴</span>
+        <span>
+          <strong>Cauchemar</strong>
+          <small>Champion + rôle + 2 sorts + build complet</small>
+        </span>
+      </button>
+    </section>
+
+    <section class="roulette-panel">
+      <div class="roulette-head">
+        <div>
+          <p class="section-kicker">TON DESTIN</p>
+          <h2 id="modeTitle">Mode Facile</h2>
+        </div>
+        <button id="rerollSeed" class="ghost-button" type="button" title="Créer un nouveau seed">
+          Nouveau seed
+        </button>
+      </div>
+
+      <div id="resultGrid" class="result-grid" aria-live="polite">
+        <article class="result-card champion-card" data-slot="champion">
+          <span class="label">Champion</span>
+          <div class="result-content">
+            <div class="image-wrap"><div class="placeholder">?</div></div>
+            <strong>???</strong>
+          </div>
+        </article>
+
+        <article class="result-card" data-slot="role">
+          <span class="label">Rôle</span>
+          <div class="result-content">
+            <div class="role-icon placeholder">?</div>
+            <strong>???</strong>
+          </div>
+        </article>
+
+        <article class="result-card" data-slot="spell1">
+          <span class="label">Sort 1</span>
+          <div class="result-content">
+            <div class="image-wrap"><div class="placeholder">?</div></div>
+            <strong>???</strong>
+          </div>
+        </article>
+
+        <article class="result-card" data-slot="spell2">
+          <span class="label">Sort 2</span>
+          <div class="result-content">
+            <div class="image-wrap"><div class="placeholder">?</div></div>
+            <strong>???</strong>
+          </div>
+        </article>
+
+        <div id="itemsArea" class="items-area" hidden>
+          <div class="items-header">
+            <span class="label">Items imposés</span>
+            <span id="itemCount" class="mini-badge"></span>
+          </div>
+          <div id="itemsGrid" class="items-grid"></div>
+        </div>
+      </div>
+
+      <button id="rollButton" class="roll-button" type="button" disabled>
+        <span class="dice">🎲</span>
+        <span>TOURNER LA ROULETTE</span>
+      </button>
+
+      <div class="seed-row">
+        <span>Seed</span>
+        <code id="seedValue">—</code>
+      </div>
+
+      <div class="action-row">
+        <button id="copyButton" class="secondary-button" type="button" disabled>📋 Copier le challenge</button>
+        <button id="shareButton" class="secondary-button" type="button" disabled>🔗 Partager le même tirage</button>
+      </div>
+    </section>
+
+    <section class="rules">
+      <h2>Les règles du crime</h2>
+      <div class="rules-grid">
+        <div><span>1</span><p>Tu joues le champion et le rôle tirés.</p></div>
+        <div><span>2</span><p>Tu prends exactement les sorts imposés.</p></div>
+        <div><span>3</span><p>En Difficile/Cauchemar, les items tirés sont obligatoires.</p></div>
+        <div><span>4</span><p>Pas de reroll après avoir vu le résultat. Sinon la roulette gagne.</p></div>
+      </div>
+      <p class="fine-print">
+        Les données (champions, sorts, objets et icônes) sont chargées depuis Riot Data Dragon.
+        Projet communautaire non affilié à Riot Games.
+      </p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
