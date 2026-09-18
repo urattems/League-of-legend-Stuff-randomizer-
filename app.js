@@ -17,6 +17,17 @@
     "SummonerDot", "SummonerBoost"
   ]);
 
+  // Tier 3 boots are a Mid-lane quest reward in Season 2026.
+  // Data Dragon item IDs: Swiftmarch -> Spellslinger's Shoes.
+  const MID_ONLY_TIER3_BOOT_IDS = new Set([
+    "3170", // Swiftmarch
+    "3171", // Crimson Lucidity
+    "3172", // Gunmetal Greaves
+    "3173", // Chainlaced Crushers
+    "3174", // Armored Advance
+    "3175"  // Spellslinger's Shoes
+  ]);
+
   const MODE_COPY = {
     easy: {
       title: "Mode Facile",
@@ -215,7 +226,13 @@
     const items = [];
     let bootsUsed = false;
 
-    for (const item of shuffle(state.items, random)) {
+    // Tier 3 boots can only be rolled when the assigned role is MID.
+    // Other roles still have access to normal purchasable boots.
+    const roleEligibleItems = role.id === "MID"
+      ? state.items
+      : state.items.filter(item => !MID_ONLY_TIER3_BOOT_IDS.has(String(item.id)));
+
+    for (const item of shuffle(roleEligibleItems, random)) {
       const isBoots = (item.tags || []).includes("Boots");
       if (isBoots && bootsUsed) continue;
       items.push(item);
